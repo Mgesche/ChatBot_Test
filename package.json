@@ -1,26 +1,15 @@
 {
-  "name": "chatbot_test",
+  "name": "TestAPI",
   "version": "1.0.0",
-  "description": "Tester la creation d'un bot",
-  "main": "app.js",
+  "description": "Un test de l'API Heroku",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Mgesche/ChatBot_Test.git"
-  },
-  "keywords": [
-    "bot"
-  ],
-  "author": "Michael Gesche",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Mgesche/ChatBot_Test/issues"
-  },
-  "homepage": "https://github.com/Mgesche/ChatBot_Test#readme",
   "dependencies": {
-    "botbuilder": "^3.5.3",
-    "restify": "^4.3.0"
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3",
+    "mongodb": "^2.1.6"
   }
 }
