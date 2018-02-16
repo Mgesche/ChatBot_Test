@@ -51,7 +51,7 @@ app.get("/plats", function(req, res) {
   });
 });
 
-app.get("/plats2", function(req, res) {
+app.get("/plats3", function(req, res) {
   db.collection(PLATS_COLLECTION).find({}).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Echec pour recuperer les plats.");
