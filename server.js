@@ -6,6 +6,7 @@ var ObjectID = mongodb.ObjectID;
 
 var MESSAGES_COLLECTION = "messages";
 var PLATS_COLLECTION = "plats";
+var PLATS_COLLECTION = "plats";
 
 var app = express();
 app.use(express.static(__dirname + "/public"));
@@ -51,16 +52,6 @@ app.get("/plats", function(req, res) {
   });
 });
 
-app.get("/plats3", function(req, res) {
-  db.collection(PLATS_COLLECTION).find({}).toArray(function(err, docs) {
-    if (err) {
-      handleError(res, err.message, "Echec pour recuperer les plats.");
-    } else {
-      res.status(200).json(docs);
-    }
-  });
-});
-
 /*  "/plats_Random"
  *    GET: Renvois un plat au hasard
  */
@@ -69,7 +60,7 @@ app.get("/plats_Random", function(req, res) {
     if (err) {
       handleError(res, err.message, "Echec pour recuperer les plats.");
     } else {
-      res.status(200).json(docs)[0];
+      res.status(200).json(docs);
     }
   });
 });
@@ -92,6 +83,23 @@ app.get("/plats_7Days", function(req, res) {
       res.status(200).json(docs);
     }
   });
+});
+
+/*  "/contactBot"
+ *    POST : Stocke la question du chatbot
+ */
+app.post("/contactBot", function(req, res) {
+
+  var newMessage = req.body;
+
+  db.collection(MESSAGES_COLLECTION).insertOne(newMessage, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to create new message.");
+    } else {
+      res.status(201).json(doc.ops[0]);
+    }
+  });
+
 });
 
 /* https://mysterious-journey-93631.herokuapp.com/plats_7Days */
