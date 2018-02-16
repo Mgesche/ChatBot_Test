@@ -101,9 +101,18 @@ app.post("/contactBot", function(req, res) {
   });
 
   /* Reponse */
-  res.send({
-    fulfillmentText: "Et voici ma reponse"
-  })
+  res.send(
+    {"messages": [
+      {
+        "speech": "Text response1",
+        "type": 0
+      },
+      {
+        "speech": "Text response2",
+        "type": 0
+      }
+    ]}
+  );
 
 });
 
