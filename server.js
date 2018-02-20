@@ -101,14 +101,22 @@ app.post("/contactBot", function(req, res) {
   });
 
   /* Reponse */
+  var intentName = req.result.metadata.intentName;
+  var reponse;
+
+  switch (intentName) {
+    case "Qu'est ce qu'on mange ?":
+      var date = req.result.parameters.date;
+      reponse = QuEstCeQuOnMange(date);
+      break; 
+    default: 
+      reponse = "Je n'ai pas compris ce que vous demandiez";
+  };
+
   res.send(
     {"messages": [
       {
-        "speech": "Text response1",
-        "type": 0
-      },
-      {
-        "speech": "Text response2",
+        "speech": reponse,
         "type": 0
       }
     ]}
@@ -117,3 +125,56 @@ app.post("/contactBot", function(req, res) {
 });
 
 /* https://mysterious-journey-93631.herokuapp.com/plats_7Days */
+
+/* ******* */
+/* Intents */
+/* ******* */
+
+/* Qu'est ce qu'on mange ? */
+function QuEstCeQuOnMange(date) {
+  var reponse;
+  reponse = "Je propose de ne pas manger le "+date;
+  return reponse;
+}
+
+{
+  "_id": {
+      "$oid": "5a8c1f23627b4f0014d34b4d"
+  },
+  "id": "812e5a54-59b6-4a48-a574-05fedd82de1e",
+  "timestamp": "2018-02-20T13:14:03.341Z",
+  "lang": "fr",
+  "result": {
+      "source": "agent",
+      "resolvedQuery": "Qu'est ce qu'on mange ?",
+      "speech": "",
+      "action": "",
+      "actionIncomplete": false,
+      "parameters": {
+          "date": ""
+      },
+      "contexts": [],
+      "metadata": {
+          "intentId": "6b356f4b-3947-46c4-91cc-c60d2883870a",
+          "webhookUsed": "true",
+          "webhookForSlotFillingUsed": "false",
+          "intentName": "Qu'est ce qu'on mange ?"
+      },
+      "fulfillment": {
+          "speech": "Voyons voir...",
+          "messages": [
+              {
+                  "type": 0,
+                  "speech": "Voyons voir..."
+              }
+          ]
+      },
+      "score": 0.800000011920929
+  },
+  "status": {
+      "code": 200,
+      "errorType": "success",
+      "webhookTimedOut": false
+  },
+  "sessionId": "62adbdce-6617-41bf-80aa-7ecf400f6e70"
+}
