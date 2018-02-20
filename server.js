@@ -126,6 +126,22 @@ app.post("/contactBot", function(req, res) {
 
 /* https://mysterious-journey-93631.herokuapp.com/plats_7Days */
 
+/* ***** */
+/* Plats */
+/* ***** */
+function Plat_GetOne() {
+  var plat;
+  db.collection(PLATS_COLLECTION).findOne().toArray(function(err, docs) {
+    if (err) {
+      plat = "Echec pour recuperer les plats.";
+    } else {
+      plat = docs;
+    }
+  });
+  return plat;
+}
+
+
 /* ******* */
 /* Intents */
 /* ******* */
@@ -133,6 +149,7 @@ app.post("/contactBot", function(req, res) {
 /* Qu'est ce qu'on mange ? */
 function QuEstCeQuOnMange(date) {
   var reponse;
-  reponse = "Je propose de ne pas manger le "+date;
+  //reponse = "Je propose de ne pas manger le "+date;
+  reponse = Plat_GetOne();
   return reponse;
 }
