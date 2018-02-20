@@ -101,12 +101,12 @@ app.post("/contactBot", function(req, res) {
   });
 
   /* Reponse */
-  var intentName = req.result.metadata.intentName;
+  var intentName = req.body.result.metadata.intentName;
   var reponse;
 
   switch (intentName) {
     case "Qu'est ce qu'on mange ?":
-      var date = req.result.parameters.date;
+      var date = req.body.result.parameters.date;
       reponse = QuEstCeQuOnMange(date);
       break; 
     default: 
