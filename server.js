@@ -90,8 +90,12 @@ app.get("/plats_7Days", function(req, res) {
  */
 app.post("/contactBot", function(req, res) {
 
+  console.log("Appel contactBot");
+
   /* Sauvegarde de la query */
   var newMessage = req.body;
+  console.log(newMessage);
+
   /*
   db.collection(MESSAGES_COLLECTION).insertOne(newMessage, function(err, doc) {
     if (err) {
@@ -104,6 +108,7 @@ app.post("/contactBot", function(req, res) {
 
   /* Reponse */
   var intentName = newMessage.result.metadata.intentName;
+  console.log(intentName);
   var reponse;
 
   switch (intentName) {
@@ -114,6 +119,8 @@ app.post("/contactBot", function(req, res) {
     default: 
       reponse = "Je n'ai pas compris ce que vous demandiez";
   };
+
+  console.log(reponse);
 
   res.send(
     {"messages": [
