@@ -92,6 +92,7 @@ app.post("/contactBot", function(req, res) {
 
   /* Sauvegarde de la query */
   var newMessage = req.body;
+  /*
   db.collection(MESSAGES_COLLECTION).insertOne(newMessage, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to create new message.");
@@ -99,14 +100,15 @@ app.post("/contactBot", function(req, res) {
       res.status(201).json(doc.ops[0]);
     }
   });
+  */
 
   /* Reponse */
-  var intentName = req.body.result.metadata.intentName;
+  var intentName = newMessage.result.metadata.intentName;
   var reponse;
 
   switch (intentName) {
     case "Qu'est ce qu'on mange ?":
-      var date = req.body.result.parameters.date;
+      var date = newMessage.result.parameters.date;
       reponse = QuEstCeQuOnMange(date);
       break; 
     default: 
