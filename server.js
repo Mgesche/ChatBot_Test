@@ -130,14 +130,7 @@ app.post("/contactBot", function(req, res) {
 /* Plats */
 /* ***** */
 function Plat_GetOne() {
-  var plat;
-  db.collection(PLATS_COLLECTION).findOne().toArray(function(err, docs) {
-    if (err) {
-      plat = "Echec pour recuperer les plats.";
-    } else {
-      plat = docs;
-    }
-  });
+  var plat = db.collection(PLATS_COLLECTION).findOne();
   return plat;
 }
 
