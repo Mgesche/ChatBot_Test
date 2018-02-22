@@ -139,6 +139,7 @@ app.post("/contactBot", function(req, res) {
 /* Plats */
 /* ***** */
 function Plat_GetOne() {
+  console.log("Plat_GetOne()");
   var plat = db.collection(PLATS_COLLECTION).findOne();
   return plat;
 }
@@ -150,6 +151,7 @@ function Plat_GetOne() {
 
 /* Qu'est ce qu'on mange ? */
 function QuEstCeQuOnMange(date) {
+  console.log("QuEstCeQuOnMange()");
   var reponse;
   //reponse = "Je propose de ne pas manger le "+date;
   reponse = Plat_GetOne();
