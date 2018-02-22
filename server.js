@@ -142,6 +142,7 @@ async function Plat_GetOne() {
   console.log("Plat_GetOne()");
   var platJSON = await db.collection(PLATS_COLLECTION).findOne();
   var plat = platJSON.Plat;
+  console.log("Plat_GetOne() : " + plat);
   return plat;
 }
 
@@ -156,5 +157,6 @@ async function QuEstCeQuOnMange(date) {
   var reponse;
   //reponse = "Je propose de ne pas manger le "+date;
   reponse = Plat_GetOne();
+  console.log("QuEstCeQuOnMange() : " + plat);
   return reponse;
 }
