@@ -114,7 +114,7 @@ app.post("/contactBot", function(req, res) {
   switch (intentName) {
     case "Qu'est ce qu'on mange ?":
       var date = newMessage.result.parameters.date;
-      reponse = QuEstCeQuOnMange(date);
+      reponse = await QuEstCeQuOnMange(date);
       break; 
     default: 
       reponse = "Je n'ai pas compris ce que vous demandiez";
