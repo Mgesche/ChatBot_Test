@@ -140,8 +140,8 @@ app.post("/contactBot", function(req, res) {
 /* ***** */
 async function Plat_GetOne() {
   console.log("Plat_GetOne()");
-  var plat = await db.collection(PLATS_COLLECTION).findOne();
-  console.log(plat);
+  var platJSON = await db.collection(PLATS_COLLECTION).findOne();
+  var plat = platJSON.Plat;
   return plat;
 }
 
@@ -156,6 +156,5 @@ async function QuEstCeQuOnMange(date) {
   var reponse;
   //reponse = "Je propose de ne pas manger le "+date;
   reponse = Plat_GetOne();
-  console.log(reponse);
   return reponse;
 }
