@@ -156,7 +156,7 @@ async function QuEstCeQuOnMange(date) {
   console.log("QuEstCeQuOnMange()");
   var reponse;
   //reponse = "Je propose de ne pas manger le "+date;
-  reponse = Plat_GetOne();
+  reponse = await Plat_GetOne();
   console.log("QuEstCeQuOnMange() : " + reponse);
   return reponse;
 }
