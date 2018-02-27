@@ -142,8 +142,8 @@ app.post("/contactBot", function(req, res) {
           );
       };
 
-    }
- /* });*/
+ /*   }
+  });*/
 
 });
 
