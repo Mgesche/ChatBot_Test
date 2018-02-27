@@ -114,7 +114,7 @@ app.post("/contactBot", function(req, res) {
         
         /* Qu'est ce qu'on mange ? */
         case "Qu'est ce qu'on mange ?": 
-          QuEstCeQuOnMange(date);
+          QuEstCeQuOnMange(res, date);
           break;
         
         default: 
@@ -153,7 +153,7 @@ async function Plat_GetOne() {
 /* ******* */
 
 /* Qu'est ce qu'on mange ? */
-function QuEstCeQuOnMange(date) {
+function QuEstCeQuOnMange(res, date) {
 
   console.log("QuEstCeQuOnMange()");
   
