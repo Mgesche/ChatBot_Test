@@ -107,27 +107,14 @@ app.post("/contactBot", function(req, res) {
       */
       /* Reponse */
       var intentName = newMessage.result.metadata.intentName;
+      var date = newMessage.result.parameters.date;
       console.log(intentName);
       
       switch (intentName) {
         
-        case "Qu'est ce qu'on mange ?":
-          var date = newMessage.result.parameters.date;
-          
-          db.collection(PLATS_COLLECTION).findOne(function(err, doc) {
-            var plat = doc.Plat;
-            console.log(plat);
-            reponse = plat;
-            res.send(
-              {"messages": [
-                {
-                  "speech": reponse,
-                  "type": 0
-                }
-              ]}
-            );
-          });
-          
+        /* Qu'est ce qu'on mange ? */
+        case "Qu'est ce qu'on mange ?": 
+          QuEstCeQuOnMange(date);
           break;
         
         default: 
@@ -166,11 +153,23 @@ async function Plat_GetOne() {
 /* ******* */
 
 /* Qu'est ce qu'on mange ? */
-async function QuEstCeQuOnMange(date) {
+function QuEstCeQuOnMange(date) {
+
   console.log("QuEstCeQuOnMange()");
-  var reponse;
-  //reponse = "Je propose de ne pas manger le "+date;
-  reponse = await Plat_GetOne();
-  console.log("QuEstCeQuOnMange() : " + reponse);
-  return reponse;
+  
+  /* Recherche d'un plat au hasard */
+  db.collection(PLATS_COLLECTION).findOne(function(err, doc) {
+    var plat = doc.Plat;
+    console.log(plat);
+    reponse = "Alors, je propose " + plat+". Qu'en pensez vous ?";
+    res.send(
+      {"messages": [
+        {
+          "speech": reponse,
+          "type": 0
+        }
+      ]}
+    );
+  });
+
 }
