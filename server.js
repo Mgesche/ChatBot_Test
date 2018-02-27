@@ -98,16 +98,17 @@ app.post("/contactBot", function(req, res) {
   var newMessage = req.body;
   console.log(newMessage);
 
+  /*
   db.collection(MESSAGES_COLLECTION).insertOne(newMessage, function(err, doc) {
+
     if (err) {
       handleError(res, err.message, "Failed to create new message.");
     } else {
-      
+      */
       /* Reponse */
       var intentName = newMessage.result.metadata.intentName;
       console.log(intentName);
       
-
       switch (intentName) {
         
         case "Qu'est ce qu'on mange ?":
@@ -142,7 +143,7 @@ app.post("/contactBot", function(req, res) {
       };
 
     }
-  });
+ /* });*/
 
 });
 
