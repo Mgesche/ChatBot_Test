@@ -92,44 +92,57 @@ app.post("/contactBot", function(req, res) {
 
   console.log("Appel contactBot");
 
+  var reponse;
+
   /* Sauvegarde de la query */
   var newMessage = req.body;
   console.log(newMessage);
 
-  /*
   db.collection(MESSAGES_COLLECTION).insertOne(newMessage, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to create new message.");
     } else {
-      res.status(201).json(doc.ops[0]);
+      
+      /* Reponse */
+      var intentName = newMessage.result.metadata.intentName;
+      console.log(intentName);
+      
+
+      switch (intentName) {
+        
+        case "Qu'est ce qu'on mange ?":
+          var date = newMessage.result.parameters.date;
+          
+          db.collection(PLATS_COLLECTION).findOne(function(err, doc) {
+            var plat = doc.Plat;
+            console.log(plat);
+            reponse = plat;
+            res.send(
+              {"messages": [
+                {
+                  "speech": reponse,
+                  "type": 0
+                }
+              ]}
+            );
+          });
+          
+          break;
+        
+        default: 
+          reponse = "Je n'ai pas compris ce que vous demandiez";
+          res.send(
+            {"messages": [
+              {
+                "speech": reponse,
+                "type": 0
+              }
+            ]}
+          );
+      };
+
     }
   });
-  */
-
-  /* Reponse */
-  var intentName = newMessage.result.metadata.intentName;
-  console.log(intentName);
-  var reponse;
-
-  switch (intentName) {
-    case "Qu'est ce qu'on mange ?":
-      var date = newMessage.result.parameters.date;
-      reponse = await QuEstCeQuOnMange(date);
-      break; 
-    default: 
-      reponse = "Je n'ai pas compris ce que vous demandiez";
-  };
-
-  console.log(reponse);
-
-  res.send(
-    {"messages": [
-      {
-        "speech": reponse,
-        "type": 0
-      }
-    ]}
-  );
 
 });
 
